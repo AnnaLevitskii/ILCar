@@ -1,5 +1,6 @@
 package manager;
 
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,11 +71,24 @@ public class HelperUser extends HelperBase{
         findAndType(inputEmail, email);
         findAndType(inputPassword, password);
     }
+    public void fillLoginForm(User user){
+        findAndType(inputEmail, user.getEmail());
+        findAndType(inputPassword, user.getPassword());
+    }
+
     public void loginSubmit(){
         click(buttonLogin);
     }
     public boolean isLogged() {
-        return isElPressent(By.xpath("//h1[text()='Logged in']"));
+        return isElPressent(By.xpath("//a[text()=' Logout ']"));
     }
+    public void logout() {
+        click(By.xpath("//a[text()=' Logout ']"));
+    }
+    public void closeOkPopup() {
+        if(isElPressent(By.tagName("mat-dialog-container")))
+            click(By.xpath("//button[text()='Ok']"));
+    }
+
 
 }

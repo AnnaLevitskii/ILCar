@@ -49,6 +49,14 @@ public class HelperBase {
     public HelperBase(WebDriver wd) {
         this.wd = wd;
     }
+    public void pause(int time){
+        try {
+            Thread.sleep(time);
+        }catch (InterruptedException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public void findAndType(By locator, String text){
         WebElement el = wd.findElement(locator);
         el.click();
@@ -96,6 +104,23 @@ public class HelperBase {
         wd.navigate().to(URL);
     }
 
+    public String getMessage(By locator){
+        return wd.findElement(locator).getText();
+    }
+
+    public String innerText(By locator){
+        WebElement el = wd.findElement(locator);
+        String text = el.getText();
+        return text;
+    }
+    public String getErrorText() {
+        return wd.findElement(By.cssSelector("div.error")).getText();
+    }
+
+    public boolean isYallaButtonNotActive() {
+        WebElement el = wd.findElement(By.cssSelector("button[type='submit']"));
+        return !el.isEnabled();
+    }
 
 
 }
