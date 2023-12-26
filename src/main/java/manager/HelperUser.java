@@ -75,8 +75,14 @@ public class HelperUser extends HelperBase{
         findAndType(inputEmail, user.getEmail());
         findAndType(inputPassword, user.getPassword());
     }
+    public void fillRegistrationForm(User user){
+        findAndType(inputName, user.getFirstName());
+        findAndType(inputLName, user.getLastName());
+        findAndType(inputEmail, user.getEmail());
+        findAndType(inputPassword, user.getPassword());
+    }
 
-    public void loginSubmit(){
+    public void submit(){
         click(buttonLogin);
     }
     public boolean isLogged() {
@@ -90,5 +96,11 @@ public class HelperUser extends HelperBase{
             click(By.xpath("//button[text()='Ok']"));
     }
 
-
+    public boolean isButtonYallaDisabled(){
+        return !wd.findElement(buttonLogin).isEnabled();
+    }
+    public void checkPolicy() {
+        if(!wd.findElement(checkboxReg).isSelected())
+            click(checkboxReg);
+    }
 }
