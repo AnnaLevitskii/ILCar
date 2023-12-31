@@ -1,9 +1,8 @@
 package manager;
 
 import models.User;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -82,9 +81,7 @@ public class HelperUser extends HelperBase{
         findAndType(inputPassword, user.getPassword());
     }
 
-    public void submit(){
-        click(buttonLogin);
-    }
+
     public boolean isLogged() {
         return isElPressent(By.xpath("//a[text()=' Logout ']"));
     }
@@ -92,15 +89,37 @@ public class HelperUser extends HelperBase{
         click(By.xpath("//a[text()=' Logout ']"));
     }
     public void closeOkPopup() {
-        if(isElPressent(By.tagName("mat-dialog-container")))
+        if(isElPressent(By.tagName("mat-dialog-container"))&& isElPressent(By.xpath("//button[text()='Ok']"))){
             click(By.xpath("//button[text()='Ok']"));
+        }
     }
 
     public boolean isButtonYallaDisabled(){
         return !wd.findElement(buttonLogin).isEnabled();
     }
     public void checkPolicy() {
+        JavascriptExecutor js = (JavascriptExecutor) wd;
         if(!wd.findElement(checkboxReg).isSelected())
-            click(checkboxReg);
+            //click(checkboxReg);
+            js.executeScript("document.querySelector('#terms-of-use').click();");
+    }
+    public void checkPolicyXY() {
+        WebElement lable = wd.findElement(By.id("terms-of-use"));
+        Rectangle rect = lable.getRect();
+        int xOffSet = -rect.getWidth()/2;
+        Actions actions = new Actions(wd);
+        actions.moveToElement(lable, xOffSet, 0).click().release().perform();
+
+
+        Dimension size = wd.manage().window().getSize();
+        System.out.println(size);
+
+    }
+
+    public void login(User user) {
+        openLoginForm();
+        fillLoginForm(user);
+        submit();
+        closeOkPopup();
     }
 }

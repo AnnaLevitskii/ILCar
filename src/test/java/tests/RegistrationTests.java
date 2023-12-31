@@ -61,7 +61,7 @@ public class RegistrationTests extends TestBase{
         User user = new User().setEmail("parker"+i+"gmail.com").setPassword("Swon634!").withFirstName("Lina").withLastName("Brown");
         app.getHelperUser().openRegForm();
         app.getHelperUser().fillRegistrationForm(user);
-        app.getHelperUser().checkPolicy();
+        app.getHelperUser().checkPolicyXY();
 
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }

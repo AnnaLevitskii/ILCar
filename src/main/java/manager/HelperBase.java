@@ -13,7 +13,8 @@ import java.util.Random;
 public class HelperBase {
     WebDriver wd;
 
-
+    //By buttonLogin = By.xpath("//button[text()='Y’alla!']");
+    By buttonLogin = By.cssSelector("button[type='submit']");
 
     public String getTempPassword() {
         String filePath = "credentials.txt";
@@ -121,6 +122,13 @@ public class HelperBase {
         WebElement el = wd.findElement(By.cssSelector("button[type='submit']"));
         return !el.isEnabled();
     }
+    public void submit(){
 
+        click(buttonLogin);
 
+    }
+
+    public void refreshPage() {
+        wd.navigate().refresh();
+    }
 }
