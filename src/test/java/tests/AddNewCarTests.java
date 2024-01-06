@@ -45,6 +45,29 @@ public class AddNewCarTests extends TestBase{
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Car added" );
     }
     @Test
+    public void addNewCarSuccess_WithPhoto(){
+        int i = new Random().nextInt(1000)+1000;
+        Car car = Car.builder()
+                .location("Tel Aviv, Israel")
+                .manufacture("Mazda")
+                .model("M3")
+                .year("2022")
+                .fuel("Petrol")
+                .seats(4)
+                .carClass("C")
+                .registrationNumber(String.valueOf(i))
+                .price(50.)
+                .about("Nice car")
+                .build();
+        app.getHelperCar().openCarForm();
+        app.getHelperCar().fillCarForm(car);
+       // app.getHelperCar().attachPhoto("/Users/anna/Documents/GitHub/ILCar/02-bugatti-cd-nardo-testing.jpg");
+        app.getHelperCar().attachPhotoWithRelativePath("02-bugatti-cd-nardo-testing.jpg");
+        app.getHelperCar().submit();
+
+        Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Car added" );
+    }
+    @Test
     public void addNewCarNegative_regNumberIsAlreadyExisted(){
 
         Car car = Car.builder()

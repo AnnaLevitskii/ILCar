@@ -32,7 +32,7 @@ public class RegistrationTests extends TestBase{
 
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Registered" );
     }
-    @Test(description = "Bug report #", enabled = false)
+    @Test
     public void RegistrationNegativeTest_name(){
         Random random = new Random();
         int i = random.nextInt(1000);
