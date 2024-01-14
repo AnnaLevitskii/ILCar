@@ -93,10 +93,6 @@ public class HelperUser extends HelperBase{
             click(By.xpath("//button[text()='Ok']"));
         }
     }
-
-    public boolean isButtonYallaDisabled(){
-        return !wd.findElement(buttonLogin).isEnabled();
-    }
     public void checkPolicy() {
         JavascriptExecutor js = (JavascriptExecutor) wd;
         if(!wd.findElement(checkboxReg).isSelected())

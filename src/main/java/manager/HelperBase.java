@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +16,8 @@ import java.util.Random;
 
 public class HelperBase {
     WebDriver wd;
+
+    Logger logger = LoggerFactory.getLogger(HelperBase.class);
 
     //By buttonLogin = By.xpath("//button[text()='Y’alla!']");
     By buttonLogin = By.cssSelector("button[type='submit']");
@@ -120,9 +124,8 @@ public class HelperBase {
         return wd.findElement(By.cssSelector("div.error")).getText();
     }
 
-    public boolean isYallaButtonNotActive() {
-        WebElement el = wd.findElement(By.cssSelector("button[type='submit']"));
-        return !el.isEnabled();
+    public boolean isButtonYallaDisabled() {
+        return !wd.findElement(buttonLogin).isEnabled();
     }
     public void submit(){
 

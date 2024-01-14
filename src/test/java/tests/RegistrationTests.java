@@ -3,10 +3,12 @@ package tests;
 import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class RegistrationTests extends TestBase{
@@ -30,6 +32,7 @@ public class RegistrationTests extends TestBase{
 
         app.getHelperUser().submit();
 
+        logger.info("Assert check that popup 'Registered' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Registered" );
     }
     @Test
@@ -41,6 +44,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();
 
+        logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test(description = "Bug report #", enabled = false)
@@ -52,6 +56,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();
 
+        logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
@@ -63,6 +68,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicyXY();
 
+        logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
@@ -74,6 +80,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();
 
+        logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
@@ -84,6 +91,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().checkPolicy();
         app.getHelperUser().submit();
 
+        logger.info("Assert check that popup 'User already exists' is present ");
         Assert.assertTrue(app.getHelperUser().getMessage(By.tagName("mat-dialog-container")).contains("User already exists"));
     }
 
@@ -92,6 +100,5 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().closeOkPopup();
         app.getHelperUser().checkPolicy();
     }
-
 
 }

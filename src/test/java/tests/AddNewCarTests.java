@@ -42,6 +42,7 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
+        logger.info("Assert check that popup 'Car added' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Car added" );
     }
     @Test
@@ -65,7 +66,9 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().attachPhotoWithRelativePath("02-bugatti-cd-nardo-testing.jpg");
         app.getHelperCar().submit();
 
+        logger.info("Assert check that popup 'Car added' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Car added" );
+
     }
     @Test
     public void addNewCarNegative_regNumberIsAlreadyExisted(){
@@ -86,7 +89,9 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
+        logger.info("Assert check that popup 'Car adding failed' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Car adding failed" );
+
     }
     @Test
     public void addNewCarNegative_blankLocation(){
@@ -107,7 +112,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankManufacture(){
@@ -128,7 +134,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankModel(){
@@ -149,7 +156,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankYear(){
@@ -170,7 +178,9 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
+
     }
     @Test
     public void addNewCarNegative_blankFuel(){
@@ -191,7 +201,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankSeats(){
@@ -212,7 +223,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankClass(){
@@ -233,7 +245,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankRegNumber(){
@@ -253,7 +266,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
     public void addNewCarNegative_blankPrice(){
@@ -274,7 +288,8 @@ public class AddNewCarTests extends TestBase{
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
 
-        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        logger.info("Assert check that popup 'Car adding failed' is present ");
+        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
 
     @AfterMethod
