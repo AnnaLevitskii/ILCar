@@ -149,7 +149,6 @@ public class HelperBase {
         TakesScreenshot takesScreenshot = (TakesScreenshot) wd;
         File tmp = takesScreenshot.getScreenshotAs(OutputType.FILE);
         try {
-            System.out.println("here ");
             Files.copy(tmp.toPath(), new File(link).toPath());
         }catch (Exception e){
 
