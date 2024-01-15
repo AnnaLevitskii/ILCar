@@ -1,16 +1,16 @@
 package manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Random;
 
@@ -21,6 +21,7 @@ public class HelperBase {
 
     //By buttonLogin = By.xpath("//button[text()='Y’alla!']");
     By buttonLogin = By.cssSelector("button[type='submit']");
+
 
     public String getTempPassword() {
         String filePath = "credentials.txt";
@@ -128,7 +129,6 @@ public class HelperBase {
         return !wd.findElement(buttonLogin).isEnabled();
     }
     public void submit(){
-
         click(buttonLogin);
 
     }
@@ -143,5 +143,16 @@ public class HelperBase {
 
     public void refreshPage() {
         wd.navigate().refresh();
+    }
+
+    public void getScreenshot(String link) {
+        TakesScreenshot takesScreenshot = (TakesScreenshot) wd;
+        File tmp = takesScreenshot.getScreenshotAs(OutputType.FILE);
+        try {
+            System.out.println("here ");
+            Files.copy(tmp.toPath(), new File(link).toPath());
+        }catch (Exception e){
+
+        }
     }
 }
