@@ -1,5 +1,6 @@
 package tests;
 
+import manager.DataProviderUser;
 import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -19,11 +20,11 @@ public class RegistrationTests extends TestBase{
             app.getHelperUser().logout();
         }
     }
-    @Test
-    public void RegistrationPositiveTest(){
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        User user = new User().setEmail("parker"+i+"@gmail.com").setPassword("Swon634!").withFirstName("Lisa").withLastName("Brown");
+    @Test(dataProvider = "userData_successReg", dataProviderClass = DataProviderUser.class)
+    public void RegistrationPositiveTest(User user){
+//        Random random = new Random();
+//        int i = random.nextInt(1000);
+        //User user = new User().setEmail("parker"+i+"@gmail.com").setPassword("Swon634!").withFirstName("Lisa").withLastName("Brown");
         app.getHelperUser().openRegForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();
@@ -35,18 +36,7 @@ public class RegistrationTests extends TestBase{
         logger.info("Assert check that popup 'Registered' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Registered" );
     }
-    @Test
-    public void RegistrationNegativeTest_name(){
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        User user = new User().setEmail("parker"+i+"@gmail.com").setPassword("Swon634!").withFirstName("").withLastName("Brown");
-        app.getHelperUser().openRegForm();
-        app.getHelperUser().fillRegistrationForm(user);
-        app.getHelperUser().checkPolicy();
 
-        logger.info("Assert check that button Yalla is disabled ");
-        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
-    }
     @Test(description = "Bug report #", enabled = false)
     public void RegistrationNegativeTest_lastName(){
         Random random = new Random();
@@ -59,23 +49,12 @@ public class RegistrationTests extends TestBase{
         logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
-    @Test
-    public void RegistrationNegativeTest_email(){
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        User user = new User().setEmail("parker"+i+"gmail.com").setPassword("Swon634!").withFirstName("Lina").withLastName("Brown");
-        app.getHelperUser().openRegForm();
-        app.getHelperUser().fillRegistrationForm(user);
-        app.getHelperUser().checkPolicyXY();
 
-        logger.info("Assert check that button Yalla is disabled ");
-        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
-    }
-    @Test
-    public void RegistrationNegativeTest_password(){
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        User user = new User().setEmail("parker"+i+"@gmail.com").setPassword("swon634").withFirstName("Lina").withLastName("");
+    @Test(dataProvider = "userData_wrongEmailPassword", dataProviderClass = DataProviderUser.class)
+    public void RegistrationNegativeTest_ButtonYallaDisabled(User user){
+//        Random random = new Random();
+//        int i = random.nextInt(1000);
+//        User user = new User().setEmail("parker"+i+"@gmail.com").setPassword("swon634").withFirstName("Lina").withLastName("");
         app.getHelperUser().openRegForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();
@@ -83,9 +62,10 @@ public class RegistrationTests extends TestBase{
         logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
-    @Test
-    public void RegistrationNegativeTest_userWithEmailIsExisted(){
-        User user = new User().setEmail("parker47@gmail.com").setPassword("Swon634!").withFirstName("Lina").withLastName("Nowen");
+
+    @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
+    public void RegistrationNegativeTest_userWithEmailIsExisted(User user){
+        //User user = new User().setEmail("parker47@gmail.com").setPassword("Swon634!").withFirstName("Lina").withLastName("Nowen");
         app.getHelperUser().openRegForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();

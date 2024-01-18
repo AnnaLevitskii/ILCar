@@ -154,4 +154,16 @@ public class HelperBase {
 
         }
     }
+    public void clearTextBox(By lokator) {
+        String os = System.getProperty("os.name");
+        WebElement el = wd.findElement(lokator);
+        if(os.startsWith("Win")){
+            el.sendKeys(Keys.CONTROL, "a");
+        }else {
+            el.sendKeys(Keys.COMMAND, "a");
+        }
+        el.sendKeys(Keys.DELETE);
+
+    }
+
 }

@@ -174,10 +174,13 @@ public class HelperCar extends HelperBase{
     public void searchCar(String city, String dateFrom, String dateTo) {
         LocalDate now = LocalDate.now();
         LocalDate dateToFromString = LocalDate.parse(dateTo, DateTimeFormatter.ofPattern("M/dd/yyyy"));
-        if(dateToFromString.isBefore(now.plusYears(1))) {
+        LocalDate dateFromFromString = LocalDate.parse(dateFrom, DateTimeFormatter.ofPattern("M/dd/yyyy"));
+
+        if(dateToFromString.isBefore(now.plusYears(1)) && dateToFromString.isAfter(now) && dateFromFromString.isAfter(now) ) {
             typeLocation(city);
             pause(100);
-            WebElement inputDate = wd.findElement(By.xpath("//*[@id='dates' or @ng-reflect-name='dates']"));
+            WebElement inputDate = wd.findElement(By.xpath("//*[@id='dates' or @ng-reflect-name='dates' or @class='cdk-overlay-backdrop']"));
+            //WebElement inputDate = wd.findElement(By.xpath("//*[@ng-reflect-name='dates' or @class='cdk-overlay-backdrop']"));
             inputDate.click();
             inputDate.clear();
             pause(100);
@@ -188,7 +191,12 @@ public class HelperCar extends HelperBase{
             picMonth(dateTo);
             picADay(dateTo);
         }else {
-            logger.info("Non valid data `dateTo`"+ dateTo);
+            if(dateToFromString.isBefore(now)){
+                logger.info("Non valid data `dateTo`"+ dateTo );
+            }
+            if(dateFromFromString.isBefore(now)){
+                logger.info("Non valid data `dateFrom`"+ dateFrom );
+            }
         }
     }
 }

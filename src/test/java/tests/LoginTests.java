@@ -1,5 +1,6 @@
 package tests;
 
+import manager.DataProviderUser;
 import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -18,13 +19,13 @@ public class LoginTests extends TestBase{
             app.getHelperUser().logout();
         }
     }
-    @Test
-    public void logInPositiveTest2(){
+    @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
+    public void logInPositiveTest2(User user){
         //User user = new User("parker47@gmail.com", "Swon634!");
-        User user1 = new User().setEmail("parker47@gmail.com").setPassword("Swon634!");
+        //User user1 = new User().setEmail("parker47@gmail.com").setPassword("Swon634!");
 
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm(user1);
+        app.getHelperUser().fillLoginForm(user);
         app.getHelperUser().submit();
         logger.info("Assert check that popup 'Logged in' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//h1[text()='Logged in']")), "Logged in" );
@@ -38,22 +39,13 @@ public class LoginTests extends TestBase{
         logger.info("Assert check that popup 'Logged in' is present ");
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//h1[text()='Logged in']")), "Logged in" );
     }
-    @Test
-    public void logInPositiveTest1(){
+
+    @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
+    public void loginNegative_ButtonYallaDisabled(User user){
         app.getHelperUser().openLoginForm();
-        System.out.println(app.getHelperUser().getTempEmail()+ "    "+  app.getHelperUser().getTempPassword());
-        app.getHelperUser().fillLoginForm(app.getHelperUser().getTempEmail(), app.getHelperUser().getTempPassword());
-        app.getHelperUser().submit();
-        logger.info("Assert check that popup 'Logged in' is present ");
-        Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//h1[text()='Logged in']")), "Logged in" );
-    }
-    @Test
-    public void loginWrongEmail(){
-        app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("parker47gmail.com","Swon634!");
+        app.getHelperUser().fillLoginForm(user.getEmail(),user.getPassword());
         app.getHelperUser().submit();
 
-        Assert.assertEquals(app.getHelperUser().getErrorText(), "It'snot look like email");
         logger.info("Assert check that 'Yalla' button is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
@@ -66,10 +58,10 @@ public class LoginTests extends TestBase{
         logger.info("Assert check that popup 'Login or Password incorrect' is present ");
         Assert.assertTrue(app.getHelperUser().getMessage(By.tagName("mat-dialog-container")).contains("Login or Password incorrect"));
     }
-    @Test
-    public void loginUnregistredUser(){
+    @Test(dataProvider = "userData_successReg", dataProviderClass = DataProviderUser.class)
+    public void loginUnregistredUser(User user){
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("parker471234@gmail.com","Swon634!");
+        app.getHelperUser().fillLoginForm(user.getEmail(), user.getPassword());
         app.getHelperUser().submit();
 
         logger.info("Assert check that popup 'Login or Password incorrect' is present ");
