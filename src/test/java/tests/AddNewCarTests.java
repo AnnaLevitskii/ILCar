@@ -25,7 +25,7 @@ public class AddNewCarTests extends TestBase{
     }
 
     @Test(dataProvider = "newCarData_success", dataProviderClass = DataProviderCar.class)
-    public void addNewCarSuccess(Car car){
+    public void addNewCar_success(Car car){
         app.getHelperCar().openCarForm();
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
@@ -34,7 +34,7 @@ public class AddNewCarTests extends TestBase{
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//mat-dialog-container//h1")), "Car added" );
     }
     @Test(dataProvider = "newCarData_success", dataProviderClass = DataProviderCar.class)
-    public void addNewCarSuccess_WithPhoto(Car car){
+    public void addNewCar_successWithPhoto(Car car){
         app.getHelperCar().openCarForm();
         app.getHelperCar().fillCarForm(car);
        // app.getHelperCar().attachPhoto("/Users/anna/Documents/GitHub/ILCar/02-bugatti-cd-nardo-testing.jpg");
@@ -46,7 +46,7 @@ public class AddNewCarTests extends TestBase{
 
     }
     @Test(dataProvider = "carData_existit", dataProviderClass = DataProviderCar.class)
-    public void addNewCarNegative_regNumberIsAlreadyExisted(Car car){
+    public void addNewCar_negativeRegNumberIsAlreadyExisted(Car car){
         app.getHelperCar().openCarForm();
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();
@@ -57,7 +57,7 @@ public class AddNewCarTests extends TestBase{
     }
 
     @Test(dataProvider = "carData_negative", dataProviderClass = DataProviderCar.class)
-    public void addNewCarNegative(Car car){
+    public void addNewCar_negative(Car car){
         app.getHelperCar().openCarForm();
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().submit();

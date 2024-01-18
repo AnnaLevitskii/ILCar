@@ -49,6 +49,7 @@ public class DataProviderCar {
 
         return list.iterator();
     }
+
     @DataProvider
     public Iterator<Object[]> carData_negative(){
         List<Object[]> list = new ArrayList<>();

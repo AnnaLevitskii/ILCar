@@ -20,21 +20,14 @@ public class DataProviderUser {
     }
 
     @DataProvider
-    public Iterator<Object[]> userData_wrongEmailPassword(){
-        Random random = new Random();
-        int i = random.nextInt(100000000);
-        List<Object[]> list = new ArrayList<>();
-        list.add(new Object[]{ new User().setEmail("parker"+i+"gmail.com").setPassword("Swon634!").withFirstName("Lina").withLastName("Brown")});
-        list.add(new Object[]{ new User().setEmail("parker"+i+"@gmail.com").setPassword("swon634").withFirstName("Lina").withLastName("Brown")});
-
-        return list.iterator();
-    }
-    @DataProvider
     public Iterator<Object[]> userData_negativeReg(){
         Random random = new Random();
         int i = random.nextInt(100000000);
         List<Object[]> list = new ArrayList<>();
+        list.add(new Object[]{ new User().setEmail("parker"+i+"@gmail.com").setPassword("swon634").withFirstName("Lina").withLastName("Brown")});
+        list.add(new Object[]{ new User().setEmail("parker"+i+"gmail.com").setPassword("Swon634!").withFirstName("Lina").withLastName("Brown")});
         list.add(new Object[]{ new User().setEmail("parker"+i+"@gmail.com").setPassword("Swon634!").withFirstName("").withLastName("Brown")});
+        list.add(new Object[]{ new User().setEmail("parker"+i+"@gmail.com").setPassword("Swon634!").withFirstName("Loo").withLastName("")});
 
         return list.iterator();
     }

@@ -20,7 +20,7 @@ public class LoginTests extends TestBase{
         }
     }
     @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
-    public void logInPositiveTest2(User user){
+    public void logIn_positive(User user){
         //User user = new User("parker47@gmail.com", "Swon634!");
         //User user1 = new User().setEmail("parker47@gmail.com").setPassword("Swon634!");
 
@@ -31,7 +31,7 @@ public class LoginTests extends TestBase{
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//h1[text()='Logged in']")), "Logged in" );
     }
     @Test
-    public void logInPositiveTest(){
+    public void logIn_successWithGeneratedData(){
         app.getHelperUser().openLoginForm();
         System.out.println(app.getHelperUser().getTempEmail()+ "    "+  app.getHelperUser().getTempPassword());
         app.getHelperUser().fillLoginForm(app.getHelperUser().getTempEmail(), app.getHelperUser().getTempPassword());
@@ -41,7 +41,7 @@ public class LoginTests extends TestBase{
     }
 
     @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
-    public void loginNegative_ButtonYallaDisabled(User user){
+    public void login_negativeButtonYallaDisabled(User user){
         app.getHelperUser().openLoginForm();
         app.getHelperUser().fillLoginForm(user.getEmail(),user.getPassword());
         app.getHelperUser().submit();
@@ -50,7 +50,7 @@ public class LoginTests extends TestBase{
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
     }
     @Test
-    public void loginWrongPassword(){
+    public void login_negativeWrongPassword(){
         app.getHelperUser().openLoginForm();
         app.getHelperUser().fillLoginForm("parker47@gmail.com","Swon63");
         app.getHelperUser().submit();
@@ -59,7 +59,7 @@ public class LoginTests extends TestBase{
         Assert.assertTrue(app.getHelperUser().getMessage(By.tagName("mat-dialog-container")).contains("Login or Password incorrect"));
     }
     @Test(dataProvider = "userData_successReg", dataProviderClass = DataProviderUser.class)
-    public void loginUnregistredUser(User user){
+    public void login_negativeUnregistredUser(User user){
         app.getHelperUser().openLoginForm();
         app.getHelperUser().fillLoginForm(user.getEmail(), user.getPassword());
         app.getHelperUser().submit();
