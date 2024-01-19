@@ -39,13 +39,12 @@ public class RegistrationTests extends TestBase{
 
     @Test(dataProvider = "userData_negativeReg", dataProviderClass = DataProviderUser.class)
     public void Registration_negativeButtonYallaDisabled(User user){
-        if(user.getLastName()!=""){
+        if(user.getFirstName()=="" || user.getLastName()=="" || user.getEmail()==""){
+            logger.info("Blank last name (description = 'Bug report #', enabled = false)");
+        }
             app.getHelperUser().openRegForm();
             app.getHelperUser().fillRegistrationForm(user);
             app.getHelperUser().checkPolicy();
-        }else {
-            logger.info("Blank last name (description = 'Bug report #', enabled = false)");
-        }
 
         logger.info("Assert check that button Yalla is disabled ");
         Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());

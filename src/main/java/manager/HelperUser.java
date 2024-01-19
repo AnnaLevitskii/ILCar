@@ -95,9 +95,15 @@ public class HelperUser extends HelperBase{
     }
     public void checkPolicy() {
         JavascriptExecutor js = (JavascriptExecutor) wd;
-        if(!wd.findElement(checkboxReg).isSelected())
-            //click(checkboxReg);
-            js.executeScript("document.querySelector('#terms-of-use').click();");
+        try{
+            if(isElPressent(checkboxReg)){
+                if(!wd.findElement(checkboxReg).isSelected())
+                    //click(checkboxReg);
+                    js.executeScript("document.querySelector('#terms-of-use').click();");
+            }
+        }catch (Exception e){
+
+        }
     }
     public void checkPolicyXY() {
         WebElement lable = wd.findElement(By.id("terms-of-use"));

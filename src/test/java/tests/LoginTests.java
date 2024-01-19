@@ -40,10 +40,12 @@ public class LoginTests extends TestBase{
         Assert.assertEquals(app.getHelperUser().getMessage(By.xpath("//h1[text()='Logged in']")), "Logged in" );
     }
 
-    @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
-    public void login_negativeButtonYallaDisabled(User user){
+    @Test(dataProvider = "userData_negativePasswordEmail", dataProviderClass = DataProviderUser.class)
+    public void login_negativeButtonYallaDisabled(User user){ // Test fails: invalid password, blank password, blank email
+        app.getHelperUser().pause(1000);
         app.getHelperUser().openLoginForm();
         app.getHelperUser().fillLoginForm(user.getEmail(),user.getPassword());
+        app.getHelperUser().pause(1000);
         app.getHelperUser().submit();
 
         logger.info("Assert check that 'Yalla' button is disabled ");
