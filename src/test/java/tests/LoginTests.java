@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LoginTests extends TestBase{
     @BeforeMethod
     public void preConditions(){
-        System.out.println(app.getHelperUser().isLogged());
+
         if(app.getHelperUser().isLogged()){
             app.getHelperUser().logout();
         }

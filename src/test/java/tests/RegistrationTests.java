@@ -15,8 +15,7 @@ import java.util.Random;
 public class RegistrationTests extends TestBase{
     @BeforeMethod
     public void preConditions(){
-        System.out.println(app.getHelperUser().isLogged());
-        if(app.getHelperUser().isLogged()){
+        if(app.getHelperUser().isLogged()) {
             app.getHelperUser().logout();
         }
     }
@@ -41,13 +40,13 @@ public class RegistrationTests extends TestBase{
     public void Registration_negativeButtonYallaDisabled(User user){
         if(user.getFirstName()=="" || user.getLastName()=="" || user.getEmail()==""){
             logger.info("Blank last name (description = 'Bug report #', enabled = false)");
-        }
+        }else {
             app.getHelperUser().openRegForm();
             app.getHelperUser().fillRegistrationForm(user);
             app.getHelperUser().checkPolicy();
-
-        logger.info("Assert check that button Yalla is disabled ");
-        Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
+            logger.info("Assert check that button Yalla is disabled ");
+            Assert.assertTrue(app.getHelperUser().isButtonYallaDisabled());
+        }
     }
 
     @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
@@ -66,6 +65,7 @@ public class RegistrationTests extends TestBase{
     public void postCondidons(){
         app.getHelperUser().closeOkPopup();
         app.getHelperUser().checkPolicy();
+
     }
 
 }

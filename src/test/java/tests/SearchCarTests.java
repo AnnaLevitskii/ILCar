@@ -10,9 +10,10 @@ import org.testng.annotations.Test;
 public class SearchCarTests extends TestBase{
     @BeforeClass
     public void preConditions(){
-        if(!app.getHelperUser().isLogged()){
-            app.getHelperUser().login(new User().setEmail("parker47@gmail.com").setPassword("Swon634!"));
-        }
+            if(!app.getHelperUser().isLogged()){
+                app.getHelperUser().login(new User().setEmail("parker47@gmail.com").setPassword("Swon634!"));
+            }
+
     }
 
     @Test(dataProvider = "newDateData_success", dataProviderClass = DataProviderCar.class)
