@@ -68,7 +68,7 @@ public class HelperBase {
     public void findAndType(By locator, String text){
         WebElement el = wd.findElement(locator);
         el.click();
-        el.clear();
+        clearTextBox(locator);
         if(text!=null){
             el.sendKeys(text);
         }

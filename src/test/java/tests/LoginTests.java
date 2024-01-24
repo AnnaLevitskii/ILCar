@@ -19,10 +19,8 @@ public class LoginTests extends TestBase{
             app.getHelperUser().logout();
         }
     }
-    @Test(dataProvider = "userData_UserExists", dataProviderClass = DataProviderUser.class)
+    @Test(dataProvider = "userData_UserExists_fromFile", dataProviderClass = DataProviderUser.class)
     public void logIn_positive(User user){
-        //User user = new User("parker47@gmail.com", "Swon634!");
-        //User user1 = new User().setEmail("parker47@gmail.com").setPassword("Swon634!");
 
         app.getHelperUser().openLoginForm();
         app.getHelperUser().fillLoginForm(user);
